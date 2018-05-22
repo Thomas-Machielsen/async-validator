@@ -1,0 +1,25 @@
+{
+  "name": "async-validator",
+  "version": "0.1.0",
+  "description": "An Async JavaScript Validator",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint . || exit 0",
+    "prettier-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "precommit": "eslint *//*.js",
+    "watch:js": "onchange '**/**/*.js' -i -- npm run lint",
+    "watch": "npm run watch:js",
+    "fix": "eslint . --fix || exit 0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^10.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "prettier": "1.12.1"
+  }
+}
