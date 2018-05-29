@@ -7,6 +7,7 @@
 const getPropsFromObj = (arr, prop) => {
     return arr
         .filter(obj => !obj.success)
+        .filter(obj => obj[prop])
         .map(obj => obj[prop]);
 };
 
