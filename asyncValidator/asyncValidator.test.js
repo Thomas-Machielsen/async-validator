@@ -92,7 +92,7 @@ describe('the asyncValidator', () => {
 
             const result = asyncValidator.validateValidations(specMock);
 
-            expect(result).resolves.toBe({ success: true });
+            expect(result).resolves.toEqual({ success: true });
         });
 
         it('should return success false when provided with at least on false value', () => {
