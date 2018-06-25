@@ -1,6 +1,8 @@
+/* eslint no-undef: 0 */
+
 const asyncValidator = require('./asyncValidator');
 
-describe('the asyncValidator', () =>  {
+describe('the asyncValidator', () => {
 
     describe('getPropsFromObj', () => {
 
@@ -40,8 +42,8 @@ describe('the asyncValidator', () =>  {
 
             const result = asyncValidator.getPropsFromObj(mockData, propertyToGet);
 
-            return expect(result).toEqual(['Testing is cool', 'But Star Wars is cooler'])
-        })
+            return expect(result).toEqual(['Testing is cool', 'But Star Wars is cooler']);
+        });
 
     });
 
@@ -51,25 +53,27 @@ describe('the asyncValidator', () =>  {
 
             const result = asyncValidator.getAllValidations(specMock);
 
-            expect(result).toEqual([])
+            expect(result).toEqual([]);
         });
 
+        /* eslint-disable max-nested-callbacks */
         it('should return the validation() call results', () => {
             const validation = jest.fn(() => 0);
-            const specMock = { validations: [ { validation } ] };
+            const specMock = { validations: [{ validation }] };
 
             const result = asyncValidator.getAllValidations(specMock);
 
             expect(validation).toHaveBeenCalled();
             expect(result).toEqual([0]);
         });
+        /* eslint-enable max-nested-callbacks */
 
         it('should fail when not passed an array', () => {
             const specMock = true;
 
             const fn = () => asyncValidator.getAllValidations(specMock);
 
-            expect(fn).toThrow()
+            expect(fn).toThrow();
         });
     });
 
@@ -88,18 +92,16 @@ describe('the asyncValidator', () =>  {
 
             const result = asyncValidator.validateValidations(specMock);
 
-            expect(result).resolves.toBe({success: true});
+            expect(result).resolves.toBe({ success: true });
         });
 
-        it('should return success false when provided with at least on false value',() => {
-            const specMock = [{success: false}, {success: true}];
+        it('should return success false when provided with at least on false value', () => {
+            const specMock = [{ success: false }, { success: true }];
 
             const result = asyncValidator.validateValidations(specMock);
 
-            expect(result).resolves.toEqual({messages: [], options: [], success: false});
-        })
-
-
+            expect(result).resolves.toEqual({ messages: [], options: [], success: false });
+        });
     });
 
     describe('validatorWrapper', () => {
@@ -109,8 +111,6 @@ describe('the asyncValidator', () =>  {
             const result = asyncValidator.validatorWrapper(specMock);
 
             expect(typeof result).toBe('function');
-        })
+        });
     });
-
-
 });
