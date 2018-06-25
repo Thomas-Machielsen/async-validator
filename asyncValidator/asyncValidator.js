@@ -34,8 +34,8 @@ const validateValidations = allValidations => {
 };
 
 /**
- * @param {Object} obj - an object which contains validations and data which has to be validated
- * @returns {Array} - returns an array with functions (the validations)
+ * @param {{validations: [{validation: Function}]}} obj - validations spec
+ * @returns {[]} - returns an array with functions (the validations)
  */
 const getAllValidations = obj => {
     return obj.validations.map(validation => validation.validation(obj.data));
@@ -54,7 +54,7 @@ const asyncValidator = obj => {
 };
 
 /**
- * an adaptar to also allow validatorJS functions into the asyncValidator
+ * an adapter to also allow validatorJS functions into the asyncValidator
  * @param {function} fn - the validation function from validatorJS
  * @returns {Object} - data to be validated, which is a function which returns a promise
  */
@@ -66,4 +66,4 @@ const validatorWrapper = fn => {
     };
 };
 
-module.exports = { asyncValidator, validatorWrapper };
+module.exports = { asyncValidator, validatorWrapper, getPropsFromObj, getAllValidations, validateValidations };
