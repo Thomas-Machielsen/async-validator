@@ -4,7 +4,7 @@
   "description": "An Async JavaScript Validator",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint . || exit 0",
     "prettier-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "precommit": "eslint *//*.js",
