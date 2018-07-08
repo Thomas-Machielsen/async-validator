@@ -47,6 +47,41 @@ describe('the asyncValidator', () => {
 
     });
 
+    describe('validateValidations', () => {
+        it('should always return an object', () => {
+            const specPromise = Promise.resolve({ success: false });
+            const specMock = [specPromise];
+
+            const result = asyncValidator.validateValidations(specMock);
+
+            expect(typeof result).toBe('object');
+        });
+
+        it('should return success true when all validations are true', () => {
+            const specMock = [{ success: true }, { success: true }, { success: true }];
+
+            const result = asyncValidator.validateValidations(specMock);
+
+            expect(result).resolves.toEqual({ success: true });
+        });
+
+        it('should return success false when provided with at least on false value', () => {
+            const specMock = [{ success: false }, { success: true }];
+
+            const result = asyncValidator.validateValidations(specMock);
+
+            expect(result).resolves.toEqual({ messages: [], options: [], success: false });
+        });
+
+        it('should return success true when provided with an empty array', () => {
+            const specMock = [];
+
+            const result = asyncValidator.validateValidations(specMock);
+
+            expect(result).resolves.toEqual({ success: true });
+        })
+    });
+
     describe('getAllvalidations', () => {
         it('should always return an array', () => {
             const specMock = { validations: [] };
@@ -77,31 +112,14 @@ describe('the asyncValidator', () => {
         });
     });
 
-    describe('validate validations', () => {
-        it('should always return an object', () => {
-            const specPromise = Promise.resolve({ success: false });
-            const specMock = [specPromise];
+    describe('asyncValidator', () => {
+        it('should always return a promise', () => {
+            const specMock = '';
 
-            const result = asyncValidator.validateValidations(specMock);
+            const result = asyncValidator.asyncValidator(specMock);
 
-            expect(typeof result).toBe('object');
-        });
-
-        it('should return success true when all validations are true', () => {
-            const specMock = [{ success: true }, { success: true }, { success: true }];
-
-            const result = asyncValidator.validateValidations(specMock);
-
-            expect(result).resolves.toEqual({ success: true });
-        });
-
-        it('should return success false when provided with at least on false value', () => {
-            const specMock = [{ success: false }, { success: true }];
-
-            const result = asyncValidator.validateValidations(specMock);
-
-            expect(result).resolves.toEqual({ messages: [], options: [], success: false });
-        });
+            expect(typeof result).toBe('promise');
+        })
     });
 
     describe('validatorWrapper', () => {
